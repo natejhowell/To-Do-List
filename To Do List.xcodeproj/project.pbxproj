@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		A719020D26A61A4C00C04B52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A719020B26A61A4C00C04B52 /* Main.storyboard */; };
 		A719020F26A61A5100C04B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A719020E26A61A5100C04B52 /* Assets.xcassets */; };
 		A719021226A61A5100C04B52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A719021026A61A5100C04B52 /* LaunchScreen.storyboard */; };
+		A719021D26A6394300C04B52 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A719021C26A6394300C04B52 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		A719020E26A61A5100C04B52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A719021126A61A5100C04B52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A719021326A61A5100C04B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A719021C26A6394300C04B52 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BE36AE2A28AE5C5D604807A3 /* Pods-To Do List.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-To Do List.debug.xcconfig"; path = "Target Support Files/Pods-To Do List/Pods-To Do List.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,13 +75,38 @@
 			children = (
 				A719020526A61A4C00C04B52 /* AppDelegate.swift */,
 				A719020726A61A4C00C04B52 /* SceneDelegate.swift */,
-				A719020926A61A4C00C04B52 /* ViewController.swift */,
-				A719020B26A61A4C00C04B52 /* Main.storyboard */,
+				A719021B26A6393200C04B52 /* Model */,
+				A719021926A6392200C04B52 /* Controller */,
+				A719021A26A6392A00C04B52 /* View */,
 				A719020E26A61A5100C04B52 /* Assets.xcassets */,
 				A719021026A61A5100C04B52 /* LaunchScreen.storyboard */,
 				A719021326A61A5100C04B52 /* Info.plist */,
 			);
 			path = "To Do List";
+			sourceTree = "<group>";
+		};
+		A719021926A6392200C04B52 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A719020926A61A4C00C04B52 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A719021A26A6392A00C04B52 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A719020B26A61A4C00C04B52 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A719021B26A6393200C04B52 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A719021C26A6394300C04B52 /* Item.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		F8132639A91AE0A76F168735 /* Pods */ = {
@@ -88,7 +115,6 @@
 				BE36AE2A28AE5C5D604807A3 /* Pods-To Do List.debug.xcconfig */,
 				6F82CFDD8074678DB3B88E56 /* Pods-To Do List.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -206,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A719021D26A6394300C04B52 /* Item.swift in Sources */,
 				A719020A26A61A4C00C04B52 /* ViewController.swift in Sources */,
 				A719020626A61A4C00C04B52 /* AppDelegate.swift in Sources */,
 				A719020826A61A4C00C04B52 /* SceneDelegate.swift in Sources */,
