@@ -41,6 +41,8 @@ class ViewController: UITableViewController {
         
     }
     
+    // MARK: - Tableview Datasource Methods
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoItems?.count ?? 1
     }
@@ -58,6 +60,9 @@ class ViewController: UITableViewController {
         
         return cell
     }
+    
+    //MARK: - TableView Delegate Methods
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let item = toDoItems?[indexPath.row] {
@@ -75,6 +80,8 @@ class ViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
+    // MARK: - Add New Items
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
