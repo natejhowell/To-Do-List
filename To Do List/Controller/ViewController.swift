@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
 class ViewController: UITableViewController {
     
@@ -49,7 +50,7 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! SwipeTableViewCell
         
         if let item = toDoItems?[indexPath.row] {
         cell.textLabel?.text = item.title
@@ -57,7 +58,7 @@ class ViewController: UITableViewController {
         } else {
             cell.textLabel?.text = "No Items added"
         }
-        
+        cell.delegate = self
         return cell
     }
     
@@ -114,3 +115,19 @@ class ViewController: UITableViewController {
     
 }
 
+//MARK: - Swipe Cell Delegate Methods
+
+extension ViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+
+        return [deleteAction]
+    }
+}
