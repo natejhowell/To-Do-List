@@ -19,6 +19,7 @@ class ViewController: UITableViewController {
         refreshData()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
     }
     
     func refreshData() {
@@ -36,7 +37,7 @@ class ViewController: UITableViewController {
             } catch {
                 print("Error saving item \(error)")
             }
-            
+        
             tableView.reloadData()
         
     }
@@ -97,18 +98,19 @@ class ViewController: UITableViewController {
             self.refreshData()
             
             self.saveItem(item: newItem)
+            
         }
-        
         
         alert.addAction(action)
         alert.addTextField { (alertTextField) in
             textField = alertTextField
             alertTextField.placeholder = "Create new item"
             
-            
         }
-    
+        
         present(alert, animated: true, completion: nil)
+        
+        //toDoItems = toDoItems?.sorted(byKeyPath: "dateCreated", ascending: true)
         
     }
     
