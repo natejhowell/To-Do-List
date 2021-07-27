@@ -25,6 +25,7 @@ class ViewController: UITableViewController {
     func refreshData() {
         
         toDoItems = realm.objects(Item.self)
+        toDoItems = toDoItems?.sorted(byKeyPath: "dateCreated", ascending: false)
         
     }
     
@@ -109,8 +110,6 @@ class ViewController: UITableViewController {
         }
         
         present(alert, animated: true, completion: nil)
-        
-        //toDoItems = toDoItems?.sorted(byKeyPath: "dateCreated", ascending: true)
         
     }
     
