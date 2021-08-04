@@ -7,11 +7,10 @@
 
 import UIKit
 import RealmSwift
-import SwipeCellKit
 
 class ViewController: UITableViewController {
     
-    var toDoItems: Results<Item>?
+    var toDoItems = [Item?]()
     let realm = try! Realm()
     
     override func viewDidLoad() {
@@ -24,49 +23,49 @@ class ViewController: UITableViewController {
     
     func refreshData() {
         
-        toDoItems = realm.objects(Item.self)
+//        toDoItems = realm.objects(Item.self)
         
     }
     
     func saveItem(item: Item) {
-        
+
             do {
                 try realm.write {
-                    realm.add(item)
+//                    realm.add(item)
                 }
             } catch {
                 print("Error saving item \(error)")
             }
-            
+
             tableView.reloadData()
-        
+
     }
     
     // MARK: - Tableview Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItems?.count ?? 1
+        return toDoItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! SwipeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         
-        if let item = toDoItems?[indexPath.row] {
-        cell.textLabel?.text = item.title
-        cell.accessoryType = item.done ? .checkmark : .none
+        if let item = toDoItems[indexPath.row] {
+            cell?.textLabel?.text = item.title
+            cell?.accessoryType = item.done ? .checkmark : .none
         } else {
-            cell.textLabel?.text = "No Items added"
+            cell?.textLabel?.text = "No Items added"
         }
-        cell.delegate = self
-        return cell
+//        cell.delegate = self
+        return cell!
     }
     
     //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let item = toDoItems?[indexPath.row] {
+        if let item = toDoItems[indexPath.row] {
             do {
                 try realm.write {
                     item.done = !item.done
@@ -75,7 +74,7 @@ class ViewController: UITableViewController {
                 print("Error saving done status, \(error)")
             }
         }
-        
+
         tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -113,21 +112,18 @@ class ViewController: UITableViewController {
         
     }
     
-}
 
-//MARK: - Swipe Cell Delegate Methods
 
-extension ViewController: SwipeTableViewCellDelegate {
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
+//MARK: - Swipe to Delete Method
 
-        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
-            // handle action by updating model with deletion
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            toDoItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+            print("No items to delete")
         }
-
-        // customize the action appearance
-        deleteAction.image = UIImage(named: "delete")
-
-        return [deleteAction]
     }
+
 }

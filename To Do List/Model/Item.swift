@@ -6,9 +6,8 @@
 //
 
 import Foundation
-import RealmSwift
 
-class Item: Object {
-    @objc dynamic var title: String = ""
-    @objc dynamic var done: Bool = false
+class Item {
+    var title: String = ""
+    var done: Bool = false
 }
