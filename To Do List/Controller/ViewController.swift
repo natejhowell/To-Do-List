@@ -43,7 +43,7 @@ class ViewController: UITableViewController {
     // MARK: - Tableview Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItems.isEmpty ? 1 : toDoItems.count // if toDoItems is empty, show 1 cell with the "No items added" text
+        return toDoItems.count // if toDoItems is empty, show 1 cell with the "No items added" text
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,6 +112,29 @@ class ViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    // MARK: - Swipe to delete
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let itemToDelete = toDoItems[indexPath.row]
+        
+        if editingStyle == .delete {
+            toDoItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        do {
+            try realm.write {
+                realm.delete(itemToDelete)
+            }
+        } catch {
+            print("Error saving item \(error)")
+        }
+        
+        refreshData()
+    
     }
     
 }
