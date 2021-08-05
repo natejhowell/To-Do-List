@@ -90,7 +90,7 @@ class ViewController: UITableViewController {
         
         let alert = UIAlertController(title: "Add Item", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+        let addAction = UIAlertAction(title: "Add", style: .default) { (action) in
             
             let newItem = Item()
             newItem.title = textField.text!
@@ -100,7 +100,10 @@ class ViewController: UITableViewController {
             self.tableView.reloadData()
         }
         
-        alert.addAction(action)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
         alert.addTextField { (alertTextField) in
             textField = alertTextField
             alertTextField.placeholder = "Create new item"
