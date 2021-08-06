@@ -50,16 +50,20 @@ class ViewController: UITableViewController {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else { return UITableViewCell() }
         let item = toDoItems[indexPath.row]
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: item.title)
-            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-        let attributeString2: NSMutableAttributedString = NSMutableAttributedString(string: item.title)
         
         if toDoItems.isEmpty {
             cell.textLabel?.text = "No Items added"  // make sure there are items in the toDoItems array before selecting
         } else {
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
-            cell.textLabel?.attributedText = item.done ? attributeString : attributeString2
+            if item.done {
+                let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: item.title)
+                attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+                cell.textLabel?.attributedText = attributeString
+            } else {
+                cell.textLabel?.attributedText = nil
+                cell.textLabel?.text = item.title
+            }
         }
         
         return cell
