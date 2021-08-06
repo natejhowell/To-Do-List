@@ -49,18 +49,23 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") else { return UITableViewCell() }
+        let item = toDoItems[indexPath.row]
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: item.title)
+            attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        let attributeString2: NSMutableAttributedString = NSMutableAttributedString(string: item.title)
         
         if toDoItems.isEmpty {
             cell.textLabel?.text = "No Items added"  // make sure there are items in the toDoItems array before selecting
         } else {
-            let item = toDoItems[indexPath.row]
-            
             cell.textLabel?.text = item.title
             cell.accessoryType = item.done ? .checkmark : .none
+            cell.textLabel?.attributedText = item.done ? attributeString : attributeString2
         }
         
         return cell
     }
+
+
     
     //MARK: - TableView Delegate Methods
     
